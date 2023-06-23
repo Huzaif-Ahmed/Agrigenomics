@@ -24,7 +24,7 @@ def predict():
     if request.method == "POST":
         modelp = getpop()
         modelh = getheight()
-        seq = request.form["burr"]
+        seq = request.input_stream["burr"]
         seq = "".join(str({"A": 0, "C": 1, "T": 2, "G": 3}.get(char, char)) for char in seq)
         high = modelh.predict([[seq]])
         pop = modelp.predict([seq])
