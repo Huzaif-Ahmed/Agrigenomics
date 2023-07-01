@@ -7,7 +7,7 @@ import tensorflow as tf
 app = Flask(__name__, static_folder='static')
 
 
-f= open(r"C:\\Users\\91994\\Desktop\\oryza sativa height prediction\\flask\\Subpopulation.pkl", "rb") 
+f= open(r"./Subpopulation.pkl", "rb") 
 modelp=pickle.load(f)
 
 
