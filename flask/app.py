@@ -6,33 +6,46 @@ import tensorflow as tf
 
 app = Flask(__name__, static_folder='static')
 
-def getpop():
-    with open(r"C:\Users\91994\Desktop\oryza sativa height prediction\flask\Subpopulation.pkl", "rb") as f:
-        model=pickle.load(f)
-    return model
 
-def getheight():
-    model = tf.keras.models.load_model('Height.h5')
-    return model
+f= open(r"C:\\Users\\91994\\Desktop\\oryza sativa height prediction\\flask\\Subpopulation.pkl", "rb") 
+modelp=pickle.load(f)
+
+
+
+modelh = tf.keras.models.load_model('Height.h5')
+Subpopulation_dict={
+    0:'Temperate Japonica',
+    1:'Indica I', 2:'Indica II', 3:'VI/Aromatic',
+       4:'Indica Intermediate', 5:'Aus', 6:'Intermediate', 7:'Tropical Japonica',
+       8:'Indica III', 9:'Japonica Intermediate'
+}  
 
 @app.route("/")
 def home():
     return render_template("index.html", title="Home Page")
 
+
 @app.route("/predict", methods=["POST"])
 def predict():
     if request.method == "POST":
-        modelp = getpop()
-        modelh = getheight()
-        seq = request.input_stream["burr"]
+        data = request.get_json()
+        print(data)
+        seq = data.get('burr')
+        print(seq)
         seq = "".join(str({"A": 0, "C": 1, "T": 2, "G": 3}.get(char, char)) for char in seq)
-        high = modelh.predict([[seq]])
+        seq=list(map(int, seq))  
+        print(seq)
+        high = modelh.predict([seq])
         pop = modelp.predict([seq])
+        print(high)
+        print(pop)
 
-        pre_high = high[0]
+        pre_high = high[0][0]
         pred_pop = pop[0]
+        pred_pop=Subpopulation_dict[pred_pop]
+        
 
-        return render_template("index.html", h="asdfghjk", s=pred_pop)
+        return jsonify({'h': float(pre_high), 's': str(pred_pop)})
 
 if __name__ == "__main__":
     app.run(debug=True)
