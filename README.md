@@ -13,3 +13,8 @@ The primary goal of the Agrigenomics project is to develop a model capable of ac
 - Gene sequence analysis: The project involves the analysis of gene sequences of rice cultivars to identify key genetic markers associated with plant height.
 - Predictive modeling: Utilizing machine learning and statistical techniques, the project aims to develop a predictive model that can correlate gene sequences with phenotypic characteristics.
 - Data analysis tools: The project includes the development of tools and algorithms for processing and analyzing large-scale genomic data sets to extract meaningful insights.
+
+
+## Research Paper
+
+The findings and methodologies of the Agrigenomics project have been documented in the research paper titled "Genomic Prediction yield of Oryza Sativa Using Machine Learning and Deep Learning" published in the International Journal of Research in Information Technology and Computing. The paper is available [here](https://ijritcc.org/index.php/ijritcc/article/view/9642) and provides detailed insights into the project's objectives, methodologies, and results, contributing to the broader scientific community's understanding of agrigenomics and crop breeding.
